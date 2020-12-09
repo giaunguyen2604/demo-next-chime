@@ -3,17 +3,16 @@
 
 import React from 'react';
 
-//import MeetingRoster from '../MeetingRoster';
+import MeetingRoster from '../MeetingRoster';
 import Navigation from '.';
 import { useNavigation } from '../../providers/NavigationProvider';
 
 const NavigationControl = () => {
-  const { showNavbar } = useNavigation();
-
+  const { showNavbar, showRoster } = useNavigation();
   return (
     <>
       {showNavbar ? <Navigation /> : null}
-      {/* {showRoster ? <MeetingRoster /> : null} */}
+      {showRoster ? <MeetingRoster /> : null} 
     </>
   );
 };

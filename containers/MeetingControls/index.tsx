@@ -13,24 +13,19 @@ import {
   Dots
 } from 'amazon-chime-sdk-component-library-react';
 
-//import EndMeetingControl from '../EndMeetingControl';
+import EndMeetingControl from '../EndMeetingControl';
 import { useNavigation } from '../../providers/NavigationProvider';
 import { StyledControls } from './Styled';
 
 const MeetingControls = () => {
-  //const { toggleNavbar, closeRoster, showRoster } = useNavigation();
+  const { toggleNavbar, closeRoster, showRoster } = useNavigation();
   const { isUserActive } = useUserActivityState();
-
-  // const handleToggle = () => {
-  //   if (showRoster) {
-  //     closeRoster();
-  //   }
-
-  //   toggleNavbar();
-  // };
-  const demoToggle = () => {
-    console.log("toggle click");
-  }
+  const handleToggle = () => {
+    if (showRoster) {
+      closeRoster();
+    }
+    toggleNavbar();
+  };
   return (
     <StyledControls className="controls" active={!!isUserActive}>
       <ControlBar
@@ -41,14 +36,14 @@ const MeetingControls = () => {
         <ControlBarButton
           className="mobile-toggle"
           icon={<Dots />}
-          onClick={demoToggle}
+          onClick={handleToggle}
           label="Menu"
         />
         <AudioInputControl />
         <VideoInputControl />
         <ContentShareControl />
         <AudioOutputControl />
-        {/* <EndMeetingControl /> */}
+        <EndMeetingControl />
       </ControlBar>
     </StyledControls>
   );

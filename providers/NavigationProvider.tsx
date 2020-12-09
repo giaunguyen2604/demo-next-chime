@@ -33,10 +33,9 @@ const NavigationContext = React.createContext<NavigationContextType | null>(
   null
 );
 
-//const isDesktop = () => window.innerWidth > 768;
+const isDesktop = () => (typeof window !== "undefined" && window.innerWidth > 768);
 
 const NavigationProvider = ({ children }: Props) => {
-  const [isDesktop, setIsDesktop] = useState(false);
   const [showNavbar, setShowNavbar] = useState(isDesktop);
   const [showRoster, setShowRoster] = useState(isDesktop);
   const [showMetrics, setShowMetrics] = useState(false);
@@ -44,9 +43,6 @@ const NavigationProvider = ({ children }: Props) => {
 
   const location = useRouter();
   const meetingManager = useMeetingManager();
-  useEffect(() => {
-    setIsDesktop(window.innerWidth > 768);
-  },[])
   useEffect(() => {
     if (location.pathname.includes(routes.MEETING)) {
       return () => { 
