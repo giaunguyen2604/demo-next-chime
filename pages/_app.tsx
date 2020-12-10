@@ -26,8 +26,6 @@ function MyApp({ Component, pageProps }: AppProps) {
   );
 }
 
-export default MyApp;
-
 const Theme: React.FC = ({ children }) => {
   const { theme } = useAppState();
   return (
@@ -37,3 +35,5 @@ const Theme: React.FC = ({ children }) => {
     </ThemeProvider>
   );
 };
+
+export default MyApp;

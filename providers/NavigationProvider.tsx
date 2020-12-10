@@ -33,16 +33,17 @@ const NavigationContext = React.createContext<NavigationContextType | null>(
   null
 );
 
-const isDesktop = () => (typeof window !== "undefined" && window.innerWidth > 768);
+const isDesktop = () => (process.browser ? (window.innerWidth > 768) : true);
 
 const NavigationProvider = ({ children }: Props) => {
-  const [showNavbar, setShowNavbar] = useState(isDesktop);
-  const [showRoster, setShowRoster] = useState(isDesktop);
+  const [showNavbar, setShowNavbar] = useState(isDesktop());
+  const [showRoster, setShowRoster] = useState(isDesktop());
   const [showMetrics, setShowMetrics] = useState(false);
-  const isDesktopView = useRef(isDesktop);
+  const isDesktopView = useRef(isDesktop());
 
   const location = useRouter();
   const meetingManager = useMeetingManager();
+
   useEffect(() => {
     if (location.pathname.includes(routes.MEETING)) {
       return () => { 
@@ -53,7 +54,7 @@ const NavigationProvider = ({ children }: Props) => {
 
   useEffect(() => {
     const handler = () => {
-      const isResizeDesktop = isDesktop;
+      const isResizeDesktop = isDesktop();
       if (isDesktopView.current === isResizeDesktop) {
         return;
       }
@@ -67,10 +68,9 @@ const NavigationProvider = ({ children }: Props) => {
         setShowNavbar(true);
       }
     };
-
     window.addEventListener('resize', handler);
     return () => window.removeEventListener('resize', handler);
-  }, []);
+  });
 
   const toggleRoster = (): void => {
     setShowRoster(!showRoster);
