@@ -12,6 +12,7 @@
     "amazon-chime-sdk-js": "^2.2.0",
     "aws-amplify": "^3.3.11",
     "aws-amplify-react": "^4.2.15",
+    "body-parser": "^1.19.0",
     "emoji-picker-react": "^3.2.4",
     "next": "latest",
     "react": "^16.12.0",
